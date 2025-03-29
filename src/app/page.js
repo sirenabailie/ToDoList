@@ -1,31 +1,39 @@
 'use client';
 
- // any component that uses useAuth needs this because if a component directly imports useAuth, it needs to be a client component since useAuth uses React hooks.
+import { useEffect, useState } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { getTodos } from '../api/ToDo';
+import TodoCard from '../components/ToDoCard';
+import TodoForm from '../components/ToDoForm';
 
-import { Button } from 'react-bootstrap';
-import { signOut } from '@/utils/auth'; // anything in the src dir, you can use the @ instead of relative paths
-import { useAuth } from '@/utils/context/authContext';
+export default function Home() {
+  const [todos, setTodos] = useState([]);
 
-function Home() {
-  const { user } = useAuth();
+  const getAllTodos = () => {
+    getTodos().then((fetchedTodos) => {
+      const sortedTodos = fetchedTodos.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      setTodos(sortedTodos);
+    });
+  };
+
+  useEffect(() => {
+    getAllTodos();
+  }, []);
 
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.displayName}! </h1>
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
-      </Button>
-    </div>
+    <Container className="home">
+      <Row className="justify-content-center mt-4">
+        <Col xs={12} md={8} lg={6}>
+          <TodoForm onUpdate={getAllTodos} />
+        </Col>
+      </Row>
+      <Row className="justify-content-center mt-4">
+        <Col xs={12} md={8} lg={6}>
+          {todos.map((todo) => (
+            <TodoCard key={todo.firebaseKey} todoObj={todo} onUpdate={getAllTodos} />
+          ))}
+        </Col>
+      </Row>
+    </Container>
   );
 }
-
-export default Home;
