@@ -29,27 +29,27 @@ export default function TodoCard({ todoObj, onUpdate }) {
   return (
     <Card bg="Secondary" text="light" className="mb-2 task-card">
       <Card.Body className="card-body">
-        {editMode ? <Form.Control type="text" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} className="mb-2" /> : <Card.Title>{todoObj.description}</Card.Title>}
+        {editMode ? <Form.Control type="text" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} className="mb-2 card-text" /> : <Card.Title className="card-text">{todoObj.description}</Card.Title>}
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.5rem' }}>
-          <Button variant={todoObj.isComplete ? 'success' : 'warning'} onClick={handleClick} style={{ flex: 1 }}>
-            {todoObj.isComplete ? '✅ Complete' : '⬜ Incomplete'}
+          <Button className="btn bg-transparent" onClick={handleClick} style={{ flex: 1 }}>
+            {todoObj.isComplete ? '✅' : '⬜'}
           </Button>
           {editMode ? (
             <>
               <Button variant="success" onClick={handleSave} style={{ flex: 1 }}>
-                💾 Save
+                Save
               </Button>
               <Button variant="secondary" onClick={() => setEditMode(false)} style={{ flex: 1 }}>
-                ❌ Cancel
+                Cancel
               </Button>
             </>
           ) : (
             <>
-              <Button variant="info" onClick={() => setEditMode(true)} style={{ flex: 1 }}>
-                📝 Edit
+              <Button className="btn bg-transparent" variant="info" onClick={() => setEditMode(true)} style={{ flex: 1 }}>
+                <img src="https://img.icons8.com/?size=20&id=6698&format=png&color=FFFFFF" alt="Home icon" />
               </Button>
-              <Button variant="danger" onClick={deleteThisTodo} style={{ flex: 1 }}>
-                ✖ Delete
+              <Button className="btn bg-transparent" variant="danger" onClick={deleteThisTodo} style={{ flex: 1 }}>
+                <img src="https://img.icons8.com/?size=25&id=14237&format=png&color=FFFFFF" alt="Home icon" />
               </Button>
             </>
           )}

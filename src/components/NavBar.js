@@ -6,7 +6,7 @@ import { signOut } from '../utils/auth';
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" classNamw="navbar">
       <Container>
         <Link passHref href="/" className="navbar-brand">
           ToDo List
@@ -15,7 +15,7 @@ export default function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">{/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}</Nav>
 
-          <Button variant="danger" onClick={signOut}>
+          <Button className="bg-transparent" variant="danger" onClick={signOut}>
             Sign Out
           </Button>
         </Navbar.Collapse>

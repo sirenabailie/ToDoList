@@ -44,8 +44,8 @@ export default function TodoForm({ todoObj = initialState, onUpdate }) {
           <Form.Control type="text" placeholder="What's next?" name="description" value={formInput.description} onChange={handleChange} required style={{ width: '100%' }} />
         </Col>
         <Col xs={2}>
-          <Button type="submit" variant="Secondary" className="add-btn">
-            Add
+          <Button type="submit" className="btn add-btn" variant="secondary">
+            <img src="https://img.icons8.com/?size=25&id=11153&format=png&color=FFFFFF" alt="Home icon" />
           </Button>
         </Col>
       </Row>
